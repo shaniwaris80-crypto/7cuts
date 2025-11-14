@@ -5,11 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>manuluxebrows | Cejas y Pestañas en Burgos</title>
 
+  <!-- SEO básico -->
+  <meta name="description" content="manuluxebrows · Estudio especializado en laminado y micropigmentación de cejas, lifting y extensiones de pestañas en Burgos. Reserva tu cita por WhatsApp.">
+  <meta name="keywords" content="laminado de cejas Burgos, micropigmentación cejas Burgos, lifting pestañas Burgos, extensiones pestañas Burgos, cejas y pestañas Burgos, manuluxebrows">
+  <meta name="author" content="manuluxebrows">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="manuluxebrows | Cejas y Pestañas en Burgos">
+  <meta property="og:description" content="Tu mirada, tu poder. Cejas y pestañas de lujo en Burgos. Reserva tu cita por WhatsApp.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tudominio.com">
+  <meta property="og:image" content="manuela-hero.jpg">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* COLORES MODO CLARO (POR DEFECTO) */
+      /* MODO CLARO (POR DEFECTO) */
       --bg: #f7f7f7;
       --bg-alt:#ffffff;
       --text:#111111;
@@ -58,21 +70,28 @@
     .wrapper{
       max-width:1080px;
       margin:0 auto;
-      padding:1.5rem 1.25rem 3rem;
+      padding:1.5rem 1.25rem 5rem;
     }
 
-    /* NAVBAR */
+    /* NAVBAR APPLE STYLE */
     header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter:blur(16px);
-      background:rgba(247,247,247,0.92);
-      border-bottom:1px solid var(--border);
+      position:fixed;
+      inset:0 0 auto;
+      z-index:30;
+      backdrop-filter:blur(18px);
+      background:transparent;
+      border-bottom:1px solid transparent;
+      transition:background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
-    body.dark-theme header{
-      background:rgba(5,5,5,0.92);
+    header.scrolled{
+      background:rgba(247,247,247,0.94);
+      border-bottom-color:var(--border);
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    body.dark-theme header.scrolled{
+      background:rgba(5,5,5,0.94);
     }
 
     .nav{
@@ -85,16 +104,30 @@
     }
 
     .logo{
-      font-size:1.25rem;
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+
+    .logo-main{
+      font-size:1.05rem;
       font-weight:600;
-      letter-spacing:0.08em;
+      letter-spacing:0.16em;
       text-transform:uppercase;
+    }
+
+    .logo-sub{
+      font-size:0.7rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      color:var(--muted);
     }
 
     .nav-links{
       display:flex;
       gap:1rem;
       font-size:0.86rem;
+      margin-right:0.5rem;
     }
 
     .nav-links a{
@@ -109,7 +142,6 @@
     }
 
     .theme-toggle{
-      margin-left:1rem;
       border-radius:999px;
       border:1px solid var(--border);
       background:var(--bg-alt);
@@ -136,7 +168,7 @@
       display:grid;
       grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
       gap:2rem;
-      padding-top:2rem;
+      padding-top:5.5rem; /* espacio por header fijo */
       padding-bottom:3rem;
       align-items:center;
     }
@@ -471,6 +503,86 @@
       margin-bottom:0.3rem;
     }
 
+    /* CARRUSEL ANTES / DESPUÉS */
+    .carousel{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:var(--bg-alt);
+      padding:1rem;
+      box-shadow:var(--shadow-soft);
+      margin-bottom:2rem;
+      overflow:hidden;
+    }
+
+    .carousel-track{
+      display:flex;
+      transition:transform 0.5s ease;
+    }
+
+    .carousel-slide{
+      min-width:100%;
+      display:flex;
+      gap:0.75rem;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .carousel-img{
+      flex:1 1 220px;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid var(--border);
+    }
+
+    .carousel-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .carousel-text{
+      flex:1 1 220px;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+
+    .carousel-dots{
+      display:flex;
+      justify-content:center;
+      gap:0.4rem;
+      margin-top:0.7rem;
+    }
+
+    .carousel-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:#cccccc;
+      border:none;
+      padding:0;
+      cursor:pointer;
+    }
+
+    .carousel-dot.active{
+      width:16px;
+      background:#111111;
+    }
+
+    body.dark-theme .carousel-dot{
+      background:#444;
+    }
+
+    body.dark-theme .carousel-dot.active{
+      background:#ffffff;
+    }
+
+    @media (max-width:640px){
+      .carousel-slide{
+        flex-direction:column;
+      }
+    }
+
     /* GALERÍA */
     .gallery-grid{
       display:grid;
@@ -540,6 +652,92 @@
 
     .insta-link a{
       text-decoration:underline;
+    }
+
+    /* TESTIMONIOS */
+    .testimonials-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+    }
+
+    @media (max-width:900px){
+      .testimonials-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:640px){
+      .testimonials-grid{
+        grid-template-columns:repeat(1,minmax(0,1fr));
+      }
+    }
+
+    .testimonial{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:var(--bg-alt);
+      padding:1rem;
+      font-size:0.8rem;
+      color:var(--muted);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .testimonial-stars{
+      color:#f3b500;
+      font-size:0.85rem;
+      margin-bottom:0.4rem;
+    }
+
+    .testimonial-name{
+      margin-top:0.5rem;
+      font-weight:500;
+      color:var(--text);
+    }
+
+    /* FAQ */
+    .faq-list{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:var(--bg-alt);
+      overflow:hidden;
+    }
+
+    .faq-item{
+      border-bottom:1px solid var(--border);
+    }
+
+    .faq-item:last-child{
+      border-bottom:none;
+    }
+
+    .faq-question{
+      padding:0.8rem 1rem;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:0.85rem;
+    }
+
+    .faq-question span{
+      font-weight:500;
+    }
+
+    .faq-toggle{
+      font-size:1.1rem;
+      color:var(--muted);
+    }
+
+    .faq-answer{
+      padding:0 1rem 0.9rem;
+      font-size:0.8rem;
+      color:var(--muted);
+      display:none;
+    }
+
+    .faq-item.open .faq-answer{
+      display:block;
     }
 
     /* MODAL IMAGEN */
@@ -624,7 +822,7 @@
     .toast{
       position:fixed;
       left:50%;
-      bottom:1.2rem;
+      bottom:4.5rem;
       transform:translateX(-50%) translateY(120%);
       background:#111;
       color:#f5f5f5;
@@ -635,7 +833,7 @@
       display:flex;
       align-items:center;
       gap:0.5rem;
-      z-index:50;
+      z-index:70;
       opacity:0;
       transition:all 0.25s ease;
     }
@@ -644,18 +842,90 @@
       transform:translateX(-50%) translateY(0);
       opacity:1;
     }
+
+    /* BOTTOM BAR FIJA (MÓVIL) */
+    .bottom-bar{
+      position:fixed;
+      inset:auto 0 0 0;
+      background:var(--bg-alt);
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+      padding:0.45rem 0.75rem;
+      z-index:40;
+    }
+
+    .bottom-btn{
+      flex:1;
+      text-align:center;
+      font-size:0.75rem;
+      color:var(--muted);
+      cursor:pointer;
+    }
+
+    .bottom-btn span{
+      display:block;
+      font-size:1.1rem;
+      margin-bottom:0.1rem;
+    }
+
+    @media (min-width:768px){
+      .bottom-bar{
+        max-width:480px;
+        margin:0 auto;
+        left:50%;
+        transform:translateX(-50%);
+        border-radius:999px 999px 0 0;
+      }
+    }
+
+    /* BOTÓN FLOTANTE WHATSAPP */
+    .fab-whatsapp{
+      position:fixed;
+      right:1rem;
+      bottom:4.6rem;
+      width:52px;
+      height:52px;
+      border-radius:999px;
+      background:#25D366;
+      box-shadow:0 16px 40px rgba(37,211,102,0.55);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:1.6rem;
+      cursor:pointer;
+      z-index:50;
+    }
+
+    /* ANIMACIONES SCROLL (REVEAL) */
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
   </style>
 </head>
 <body>
 
 <header>
   <nav class="nav">
-    <div class="logo">manuluxebrows</div>
+    <div class="logo">
+      <div class="logo-main">MANULUXEBROWS</div>
+      <div class="logo-sub">BROW & LASH STUDIO · BURGOS</div>
+    </div>
     <div style="display:flex;align-items:center;">
       <div class="nav-links">
         <a href="#services">Servicios</a>
         <a href="#booking">Reservas</a>
         <a href="#gallery">Galería</a>
+        <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
@@ -667,7 +937,7 @@
 
 <main class="wrapper">
   <!-- HERO -->
-  <section class="hero" id="inicio">
+  <section class="hero reveal" id="inicio" data-reveal>
     <div>
       <div class="hero-badge">
         <span>✨ Belleza, cosmética y cuidado personal</span>
@@ -676,8 +946,8 @@
         Tu mirada, tu poder. <span class="hero-highlight">Cejas y pestañas de lujo en Burgos.</span>
       </h1>
       <p class="hero-subtitle">
-        Especialista en <strong>Cejas laminado y Micropigmentación</strong> y
-        <strong>Pestañas lifting y extensiones</strong>. Resultados naturales, elegantes y personalizados para ti.
+        Especialista en <strong>cejas laminado y micropigmentación</strong> y
+        <strong>pestañas lifting y extensiones</strong>. Resultados naturales, elegantes y personalizados para ti.
       </p>
 
       <div class="hero-cta">
@@ -692,7 +962,7 @@
       <div class="hero-meta">
         <span>📍 Burgos, España</span>
         <span>📲 WhatsApp: +34 624 94 72 49</span>
-        <span>🖤 Estudio privado · Solo con cita</span>
+        <span>🖤 Estudio privado · solo con cita</span>
       </div>
     </div>
 
@@ -706,7 +976,7 @@
   </section>
 
   <!-- SERVICIOS -->
-  <section id="services">
+  <section id="services" class="reveal" data-reveal>
     <div class="section-header">
       <div>
         <h2 class="section-title">Servicios</h2>
@@ -720,34 +990,34 @@
     <div class="services-grid">
       <article class="service-card">
         <div class="service-tag">Cejas</div>
-        <h3 class="service-name">Laminado de Cejas</h3>
+        <h3 class="service-name">Laminado de cejas</h3>
         <p class="service-desc">
-          Efecto peinado y definido durante semanas. Ideal para cejas rebeldes o con poca forma.
+          Efecto peinado, definido y con más volumen visual durante semanas. Ideal para cejas rebeldes o con poca forma.
         </p>
         <p class="service-time">⏱ Duración aprox.: 60 min</p>
       </article>
 
       <article class="service-card">
         <div class="service-tag">Cejas</div>
-        <h3 class="service-name">Micropigmentación de Cejas</h3>
+        <h3 class="service-name">Micropigmentación de cejas</h3>
         <p class="service-desc">
-          Diseño a medida, simetría y tono adaptado a tu rostro y estilo. Resultado elegante y natural.
+          Diseño a medida, simetría y tono adaptado a tu rostro y estilo. Resultado elegante y muy natural.
         </p>
         <p class="service-time">⏱ Sesión inicial + retoque</p>
       </article>
 
       <article class="service-card">
         <div class="service-tag">Pestañas</div>
-        <h3 class="service-name">Lifting de Pestañas</h3>
+        <h3 class="service-name">Lifting de pestañas</h3>
         <p class="service-desc">
-          Curvatura perfecta, mirada despierta sin necesidad de máscara. Incluye tinte si lo deseas.
+          Curvatura perfecta y mirada despierta sin necesidad de máscara. Incluye tinte si lo deseas.
         </p>
         <p class="service-time">⏱ Duración aprox.: 60 min</p>
       </article>
 
       <article class="service-card">
         <div class="service-tag">Pestañas</div>
-        <h3 class="service-name">Extensiones de Pestañas</h3>
+        <h3 class="service-name">Extensiones de pestañas</h3>
         <p class="service-desc">
           Desde efecto natural hasta más marcado. Colocación pelo a pelo con máximo cuidado.
         </p>
@@ -757,7 +1027,7 @@
   </section>
 
   <!-- RESERVAS -->
-  <section id="booking">
+  <section id="booking" class="reveal" data-reveal>
     <div class="section-header">
       <div>
         <h2 class="section-title">Reservas por WhatsApp</h2>
@@ -846,8 +1116,63 @@
     </div>
   </section>
 
+  <!-- CARRUSEL ANTES / DESPUÉS -->
+  <section class="reveal" data-reveal>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Antes y después</h2>
+        <p class="section-caption">
+          Algunos resultados reales de laminado y micropigmentación.
+        </p>
+      </div>
+    </div>
+
+    <div class="carousel" id="abCarousel">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <div class="carousel-img">
+            <img src="galeria-antes-despues-1.jpg" loading="lazy" alt="Antes y después cejas clienta joven">
+          </div>
+          <div class="carousel-text">
+            <strong>Clienta joven · Laminado + diseño</strong>
+            <p>
+              Realce suave de la forma natural de la ceja, con un acabado pulido que abre la mirada sin endurecer los rasgos.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="carousel-img">
+            <img src="galeria-antes-despues-2.jpg" loading="lazy" alt="Micropigmentación cejas clienta rubia">
+          </div>
+          <div class="carousel-text">
+            <strong>Clienta rubia · Micropigmentación</strong>
+            <p>
+              Rediseño completo con un arco equilibrado y densidad controlada. Ideal para cejas claras o poco definidas.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="carousel-img">
+            <img src="galeria-modelos-cejas.jpg" loading="lazy" alt="Galería de cejas en diferentes tipos de rostro">
+          </div>
+          <div class="carousel-text">
+            <strong>Diferentes tipos de rostro</strong>
+            <p>
+              Adaptamos forma, grosor y tonalidad al óvalo facial y a tu estilo personal, desde natural hasta más marcado.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-index="0"></button>
+        <button class="carousel-dot" data-index="1"></button>
+        <button class="carousel-dot" data-index="2"></button>
+      </div>
+    </div>
+  </section>
+
   <!-- GALERÍA -->
-  <section id="gallery">
+  <section id="gallery" class="reveal" data-reveal>
     <div class="section-header">
       <div>
         <h2 class="section-title">Galería</h2>
@@ -864,35 +1189,122 @@
     <!-- IMPORTANTE: renombra tus fotos como aquí y súbelas junto a index.html -->
     <div class="gallery-grid">
       <div class="gallery-item" data-src="galeria-antes-despues-1.jpg">
-        <img src="galeria-antes-despues-1.jpg" alt="Laminado / Micropigmentación cejas - clienta joven">
+        <img src="galeria-antes-despues-1.jpg" loading="lazy" alt="Laminado / Micropigmentación cejas - clienta joven">
       </div>
       <div class="gallery-item" data-src="galeria-antes-despues-2.jpg">
-        <img src="galeria-antes-despues-2.jpg" alt="Micropigmentación cejas - clienta rubia">
+        <img src="galeria-antes-despues-2.jpg" loading="lazy" alt="Micropigmentación cejas - clienta rubia">
       </div>
       <div class="gallery-item" data-src="galeria-modelos-cejas.jpg">
-        <img src="galeria-modelos-cejas.jpg" alt="Modelos con cejas definidas">
+        <img src="galeria-modelos-cejas.jpg" loading="lazy" alt="Modelos con cejas definidas">
       </div>
       <div class="gallery-item" data-src="galeria-manuela-1.jpg">
-        <img src="galeria-manuela-1.jpg" alt="Manuela trabajando en el estudio">
+        <img src="galeria-manuela-1.jpg" loading="lazy" alt="Manuela trabajando en el estudio">
       </div>
-      <!-- Puedes duplicar o añadir más -->
+      <!-- Puedes añadir más duplicando bloques -->
       <div class="gallery-item" data-src="galeria-antes-despues-1.jpg">
-        <img src="galeria-antes-despues-1.jpg" alt="Detalle cejas clienta joven">
+        <img src="galeria-antes-despues-1.jpg" loading="lazy" alt="Detalle cejas clienta joven">
       </div>
       <div class="gallery-item" data-src="galeria-antes-despues-2.jpg">
-        <img src="galeria-antes-despues-2.jpg" alt="Antes/después cejas clienta rubia">
+        <img src="galeria-antes-despues-2.jpg" loading="lazy" alt="Antes/después cejas clienta rubia">
       </div>
       <div class="gallery-item" data-src="galeria-modelos-cejas.jpg">
-        <img src="galeria-modelos-cejas.jpg" alt="Cejas perfectas estilo natural">
+        <img src="galeria-modelos-cejas.jpg" loading="lazy" alt="Cejas perfectas estilo natural">
       </div>
       <div class="gallery-item" data-src="galeria-manuela-1.jpg">
-        <img src="galeria-manuela-1.jpg" alt="Detalle estudio manuluxebrows">
+        <img src="galeria-manuela-1.jpg" loading="lazy" alt="Detalle estudio manuluxebrows">
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="reveal" data-reveal>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Opiniones</h2>
+        <p class="section-caption">
+          Algunas de las experiencias que nuestras clientas comparten.
+        </p>
+      </div>
+    </div>
+
+    <div class="testimonials-grid">
+      <article class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>
+          “Llevaba años sin verme bien las cejas. Manuela me escuchó, me aconsejó y salí con la mirada totalmente cambiada.”
+        </p>
+        <div class="testimonial-name">Laura G.</div>
+      </article>
+      <article class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>
+          “Muy profesional, delicada y perfeccionista. El laminado de cejas y el lifting de pestañas me han simplificado la rutina.”
+        </p>
+        <div class="testimonial-name">Patricia R.</div>
+      </article>
+      <article class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>
+          “Me daba miedo la micropigmentación, pero me explicó todo paso a paso y el resultado es súper natural.”
+        </p>
+        <div class="testimonial-name">Ana M.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="reveal" data-reveal>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-caption">
+          Resolvemos algunas dudas antes de tu cita.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>¿Cuánto dura un laminado de cejas?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-answer">
+          Suele durar entre 4 y 6 semanas, dependiendo del tipo de pelo y del cuidado posterior. Te indicamos cómo mantenerlo en casa.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>¿Duele la micropigmentación de cejas?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-answer">
+          La sensación es molesta pero tolerable. Utilizamos material específico y técnica suave para que el proceso sea lo más cómodo posible.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>¿Puedo maquillarme después del tratamiento?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-answer">
+          Depende del tratamiento. Siempre te daremos unas pautas personalizadas de post-tratamiento para asegurar el mejor resultado.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>¿Cómo reservo, modifico o cancelo mi cita?</span>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-answer">
+          Todo se gestiona por WhatsApp. Desde la sección de reservas puedes enviar tu solicitud indicando si es reserva nueva, modificación o cancelación.
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACTO / FOOTER -->
-  <section id="contacto">
+  <section id="contacto" class="reveal" data-reveal>
     <footer>
       <div class="footer-top">
         <div class="footer-col">
@@ -903,7 +1315,10 @@
           <strong>Contacto</strong>
           <span>WhatsApp: <a href="https://wa.me/34624947249" target="_blank">+34 624 94 72 49</a></span>
           <span>Instagram: <a href="https://www.instagram.com/manuluxebrows" target="_blank">@manuluxebrows</a></span>
-          <span>Ubicación: Burgos (estudio privado, dirección bajo reserva)</span>
+          <span>Ubicación: Burgos (estudio privado, dirección detallada al confirmar la cita)</span>
+          <button id="btnCopyLocation" class="btn btn-outline" style="margin-top:0.5rem;padding:0.5rem 1.1rem;font-size:0.78rem;">
+            Copiar ubicación y abrir mapa
+          </button>
         </div>
       </div>
       <div class="footer-bottom">
@@ -916,7 +1331,7 @@
 
 <!-- Toast -->
 <div class="toast" id="toast">
-  ✅ Abriendo WhatsApp para enviar tu solicitud...
+  <span id="toastText">Mensaje...</span>
 </div>
 
 <!-- Lightbox -->
@@ -925,24 +1340,56 @@
   <img id="lightboxImg" src="" alt="Imagen galería manuluxebrows">
 </div>
 
+<!-- Botón flotante WhatsApp -->
+<div class="fab-whatsapp" id="fabWhatsapp" aria-label="Reservar por WhatsApp">
+  💬
+</div>
+
+<!-- Barra inferior fija -->
+<div class="bottom-bar">
+  <div class="bottom-btn" id="btnBottomMapa">
+    <span>📍</span>Mapa
+  </div>
+  <div class="bottom-btn" id="btnBottomWhats">
+    <span>💬</span>Reserva
+  </div>
+  <div class="bottom-btn" id="btnBottomInsta">
+    <span>📸</span>Instagram
+  </div>
+</div>
+
 <script>
   // Año automático
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Header Apple style (fondo al hacer scroll)
+  const header = document.querySelector("header");
+  function updateHeader(){
+    if(window.scrollY > 10){
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  }
+  window.addEventListener("scroll", updateHeader);
+  updateHeader();
 
   // Scroll a reservas
   document.getElementById("btnGoBooking")?.addEventListener("click", () => {
     document.getElementById("booking")?.scrollIntoView({behavior:"smooth"});
   });
 
-  // Toast
-  function showToast(){
+  // Toast genérico
+  function showToast(msg){
     const toast = document.getElementById("toast");
+    const text = document.getElementById("toastText");
+    text.textContent = msg;
     toast.classList.add("show");
     setTimeout(()=>toast.classList.remove("show"), 2600);
   }
 
-  // Enviar WhatsApp
-  document.getElementById("btnSend")?.addEventListener("click", () => {
+  // Enviar WhatsApp desde formulario
+  function openWhatsAppFromForm(){
     const nombre   = document.getElementById("nombre").value.trim();
     const tipo     = document.getElementById("tipo").value;
     const servicio = document.getElementById("servicio").value;
@@ -975,17 +1422,19 @@
     texto += ".";
 
     if(mensaje){
-      texto += `%0A%0ADetalles: ${mensaje}`;
+      texto += `\n\nDetalles: ${mensaje}`;
     }
 
-    texto += "%0A%0AEnviado desde la web de manuluxebrows.";
+    texto += "\n\nEnviado desde la web de manuluxebrows.";
 
     const phone = "34624947249";
-    const url = `https://wa.me/${phone}?text=${texto}`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(texto)}`;
 
-    showToast();
+    showToast("Abriendo WhatsApp para enviar tu solicitud...");
     window.open(url, "_blank");
-  });
+  }
+
+  document.getElementById("btnSend")?.addEventListener("click", openWhatsAppFromForm);
 
   // Tema claro/oscuro con memoria
   const body = document.body;
@@ -1040,6 +1489,89 @@
   document.addEventListener("keydown", (e) => {
     if(e.key === "Escape") closeLightbox();
   });
+
+  // Barra inferior
+  document.getElementById("btnBottomWhats").addEventListener("click", () => {
+    document.getElementById("booking")?.scrollIntoView({behavior:"smooth"});
+  });
+  document.getElementById("btnBottomInsta").addEventListener("click", () => {
+    window.open("https://www.instagram.com/manuluxebrows", "_blank");
+  });
+  document.getElementById("btnBottomMapa").addEventListener("click", () => {
+    const url = "https://maps.google.com/?q=Burgos%2C+España";
+    window.open(url, "_blank");
+  });
+
+  // Botón flotante WhatsApp
+  document.getElementById("fabWhatsapp").addEventListener("click", () => {
+    const phone = "34624947249";
+    const texto = "Hola Manuela, me gustaría pedir información y reservar una cita 😊";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(texto)}`;
+    showToast("Abriendo WhatsApp...");
+    window.open(url, "_blank");
+  });
+
+  // Copiar ubicación
+  document.getElementById("btnCopyLocation").addEventListener("click", async () => {
+    const texto = "Burgos, España (recibirás la dirección exacta al confirmar la cita con manuluxebrows)";
+    try{
+      await navigator.clipboard.writeText(texto);
+      showToast("Ubicación copiada. Abriendo mapa...");
+    }catch(e){
+      showToast("Abriendo mapa...");
+    }
+    window.open("https://maps.google.com/?q=Burgos%2C+España", "_blank");
+  });
+
+  // Carrusel antes/después
+  (function(){
+    const track = document.querySelector("#abCarousel .carousel-track");
+    const dots = Array.from(document.querySelectorAll("#abCarousel .carousel-dot"));
+    let index = 0;
+
+    function goTo(i){
+      index = i;
+      const offset = -i * 100;
+      track.style.transform = `translateX(${offset}%)`;
+      dots.forEach((d,idx)=>d.classList.toggle("active", idx===i));
+    }
+
+    dots.forEach(dot=>{
+      dot.addEventListener("click", ()=>{
+        const i = Number(dot.dataset.index || 0);
+        goTo(i);
+      });
+    });
+
+    // autoplay suave
+    setInterval(()=>{
+      index = (index + 1) % dots.length;
+      goTo(index);
+    }, 6000);
+  })();
+
+  // FAQ toggle
+  document.querySelectorAll(".faq-item").forEach(item=>{
+    const question = item.querySelector(".faq-question");
+    question.addEventListener("click", ()=>{
+      item.classList.toggle("open");
+      const toggle = item.querySelector(".faq-toggle");
+      toggle.textContent = item.classList.contains("open") ? "−" : "+";
+    });
+  });
+
+  // Animaciones de scroll (IntersectionObserver)
+  const revealEls = document.querySelectorAll("[data-reveal]");
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+
+  revealEls.forEach(el=>observer.observe(el));
 </script>
 
 </body>
