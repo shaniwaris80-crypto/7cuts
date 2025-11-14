@@ -1,372 +1,911 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7cuts — Hair & Style Studio</title>
-  <meta name="description" content="7cuts — Modern hairdresser studio. Book haircuts, coloring & styling via WhatsApp. Light, elegant design with gallery and offers." />
-  <meta name="theme-color" content="#f6f7fb" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>manuluxebrows | Cejas y Pestañas en Burgos</title>
+
+  <!-- Fuente moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#ffffff;
-      --bg-soft:#f6f7fb;
-      --ink:#1a1f2e;
-      --muted:#6b7280;
-      --brand:#78c2ad; /* mint */
-      --brand-2:#ffd2e5; /* blush */
-      --brand-3:#f9e27d; /* soft sun */
-      --card:#ffffff;
-      --border:#e8ecf3;
-      --shadow:0 10px 30px rgba(25, 33, 61, .06);
+      --bg: #050505;
+      --bg-alt:#111111;
+      --text:#f5f5f5;
+      --muted:#aaaaaa;
+      --accent:#ffffff;
+      --border:#222222;
       --radius:18px;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;scroll-behavior:smooth}
-    body{font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--ink); background:linear-gradient(180deg,var(--bg-soft),#fff 40%);}    
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:min(1100px, 92%);margin-inline:auto}
-    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.2rem;border-radius:999px;border:1px solid var(--border);background:#fff;box-shadow:var(--shadow);font-weight:600}
-    .btn.brand{background:var(--ink);color:#fff;border-color:transparent}
-    .btn.ghost{background:#fff}
-    .tag{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:999px;font-size:.78rem;background:var(--brand-2);}
-    .header{position:sticky;top:0;background:rgba(255,255,255,.7);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--border);z-index:50}
-    nav{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0}
-    nav .logo{display:flex;align-items:center;gap:.65rem}
-    .logo-mark{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 180deg at 50% 50%, var(--brand) 0 120deg, var(--brand-2) 120deg 240deg, var(--brand-3) 240deg 360deg);box-shadow:var(--shadow);position:relative}
-    .logo-mark::after{content:"";position:absolute;inset:8px;background:#fff;border-radius:50%;box-shadow:inset 0 3px 10px rgba(0,0,0,.06)}
-    .nav-links a{padding:.6rem .8rem;border-radius:10px}
-    .nav-links a:hover{background:var(--bg-soft)}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:3rem 0 2rem}
-    .hero h1{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:.2rem 0 1rem}
-    .hero p{color:var(--muted)}
-    .pill{display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--border);padding:.35rem .6rem;border-radius:999px;width:max-content;box-shadow:var(--shadow);}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .grid{display:grid;gap:1rem}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .section{padding:2.5rem 0}
-    h2{font-size:clamp(1.4rem,2.4vw,2rem);margin:0 0 1rem}
-    .price-row{display:flex;justify-content:space-between;gap:1rem;padding:12px 14px;border-bottom:1px dashed var(--border)}
-    .price-row:last-child{border-bottom:none}
-    .muted{color:var(--muted)}
-    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
-    .gallery img{border-radius:14px;height:200px;object-fit:cover}
-    .offer{padding:16px;border-radius:16px;border:1px solid var(--border);background:linear-gradient(180deg,#fff, var(--bg-soft));box-shadow:var(--shadow)}
-    .chips{display:flex;flex-wrap:wrap;gap:.5rem}
-    form .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    label{display:block;font-weight:600;font-size:.9rem;margin:.2rem 0}
-    input, select, textarea{width:100%;padding:.85rem 1rem;border:1px solid var(--border);border-radius:12px;background:#fff;font:inherit}
-    textarea{min-height:110px;resize:vertical}
-    .footer{border-top:1px solid var(--border);background:#fff;padding:1.5rem 0;color:var(--muted)}
-    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-    .kpi{padding:1rem;border:1px solid var(--border);border-radius:16px;background:#fff;text-align:center}
-    .kpi b{font-size:1.6rem}
-    .note{font-size:.9rem;color:var(--muted)}
-    .slash{opacity:.5}
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-      form .row{grid-template-columns:1fr}
-      .kpis{grid-template-columns:repeat(2,1fr)}
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:"Poppins",system-ui,-apple-system,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      scroll-behavior:smooth;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .wrapper{
+      max-width:1080px;
+      margin:0 auto;
+      padding:1.5rem 1.25rem 3rem;
+    }
+
+    /* NAVBAR */
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(16px);
+      background:rgba(5,5,5,0.9);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0.75rem 1.25rem;
+      max-width:1080px;
+      margin:0 auto;
+    }
+
+    .logo{
+      font-size:1.25rem;
+      font-weight:600;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:1rem;
+      font-size:0.86rem;
+    }
+
+    .nav-links a{
+      padding:0.3rem 0.6rem;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+
+    .nav-links a:hover{
+      border-color:var(--border);
+      background:#111111;
+    }
+
+    @media (max-width:640px){
+      .nav-links{
+        display:none;
+      }
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+      gap:2rem;
+      padding-top:2rem;
+      padding-bottom:3rem;
+      align-items:center;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      padding:0.25rem 0.75rem;
+      border-radius:999px;
+      border:1px solid var(--border);
+      font-size:0.75rem;
+      color:var(--muted);
+      margin-bottom:1rem;
+    }
+
+    .hero-title{
+      font-size:2.25rem;
+      line-height:1.1;
+      font-weight:600;
+      margin-bottom:0.75rem;
+    }
+
+    .hero-subtitle{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:1.5rem;
+    }
+
+    .hero-highlight{
+      font-weight:500;
+      color:var(--accent);
+    }
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.75rem;
+      margin-bottom:1rem;
+    }
+
+    .btn{
+      border-radius:999px;
+      border:1px solid var(--accent);
+      background:var(--accent);
+      color:#000;
+      padding:0.7rem 1.5rem;
+      font-size:0.9rem;
+      font-weight:500;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:0.4rem;
+      cursor:pointer;
+      transition:all 0.16s ease;
+      white-space:nowrap;
+    }
+
+    .btn-outline{
+      background:transparent;
+      color:var(--text);
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1.2rem;
+      margin-top:1rem;
+      font-size:0.8rem;
+      color:var(--muted);
+    }
+
+    .hero-photo{
+      position:relative;
+      border-radius:32px;
+      overflow:hidden;
+      background:radial-gradient(circle at top,#333 0,#050505 55%);
+      border:1px solid var(--border);
+      padding:0.4rem;
+    }
+
+    .hero-photo-inner{
+      border-radius:26px;
+      overflow:hidden;
+      background:#000;
+      aspect-ratio:4/5;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+    }
+
+    .hero-photo-inner::after{
+      content:"Manuela · Brow & Lash Artist";
+      position:absolute;
+      inset:auto 1.25rem 1.25rem 1.25rem;
+      font-size:0.8rem;
+      color:var(--text);
+      padding:0.4rem 0.7rem;
+      border-radius:999px;
+      background:rgba(0,0,0,0.78);
+      border:1px solid rgba(255,255,255,0.1);
+      text-align:center;
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-photo-placeholder{
+      width:100%;
+      height:100%;
+      background:linear-gradient(160deg,#222,#111);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-size:0.8rem;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+    }
+
+    @media (max-width:820px){
+      .hero{
+        grid-template-columns:minmax(0,1fr);
+      }
+    }
+
+    @media (max-width:640px){
+      .hero-title{
+        font-size:1.9rem;
+      }
+      .wrapper{
+        padding-inline:1rem;
+      }
+    }
+
+    /* SECTION BASE */
+    section{
+      margin-bottom:3rem;
+    }
+
+    .section-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:1rem;
+      margin-bottom:1.5rem;
+    }
+
+    .section-title{
+      font-size:1.25rem;
+      font-weight:500;
+    }
+
+    .section-caption{
+      font-size:0.8rem;
+      color:var(--muted);
+    }
+
+    /* SERVICIOS */
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:1rem;
+    }
+
+    @media (max-width:900px){
+      .services-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:520px){
+      .services-grid{
+        grid-template-columns:repeat(1,minmax(0,1fr));
+      }
+    }
+
+    .service-card{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      padding:1rem;
+      background:linear-gradient(145deg,#090909,#050505);
+      display:flex;
+      flex-direction:column;
+      gap:0.4rem;
+    }
+
+    .service-tag{
+      font-size:0.7rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      color:var(--muted);
+    }
+
+    .service-name{
+      font-size:0.95rem;
+      font-weight:500;
+    }
+
+    .service-desc{
+      font-size:0.8rem;
+      color:var(--muted);
+    }
+
+    .service-time{
+      font-size:0.75rem;
+      color:var(--muted);
+      margin-top:auto;
+    }
+
+    /* RESERVAS */
+    .booking{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:2rem;
+      align-items:flex-start;
+    }
+
+    @media (max-width:840px){
+      .booking{
+        grid-template-columns:minmax(0,1fr);
+      }
+    }
+
+    .booking-card{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      padding:1.25rem;
+      background:linear-gradient(145deg,#0b0b0b,#050505);
+    }
+
+    .booking-label{
+      font-size:0.8rem;
+      color:var(--muted);
+      margin-bottom:0.25rem;
+    }
+
+    .booking-field{
+      display:flex;
+      flex-direction:column;
+      gap:0.15rem;
+      margin-bottom:0.85rem;
+    }
+
+    .booking-input,
+    .booking-select,
+    .booking-textarea{
+      width:100%;
+      border-radius:999px;
+      border:1px solid var(--border);
+      padding:0.55rem 0.9rem;
+      background:#050505;
+      color:var(--text);
+      font-size:0.85rem;
+      outline:none;
+      transition:border 0.15s ease, background 0.15s ease;
+    }
+
+    .booking-textarea{
+      border-radius:14px;
+      min-height:80px;
+      resize:vertical;
+    }
+
+    .booking-input:focus,
+    .booking-select:focus,
+    .booking-textarea:focus{
+      border-color:#ffffff;
+      background:#000;
+    }
+
+    .booking-row{
+      display:flex;
+      gap:0.75rem;
+    }
+
+    @media (max-width:520px){
+      .booking-row{
+        flex-direction:column;
+      }
+    }
+
+    .booking-note{
+      font-size:0.75rem;
+      color:var(--muted);
+      margin-top:0.6rem;
+    }
+
+    .booking-side{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      font-size:0.8rem;
+      color:var(--muted);
+    }
+
+    .booking-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:0.4rem;
+      padding:0.25rem 0.75rem;
+      border-radius:999px;
+      border:1px solid var(--border);
+      font-size:0.7rem;
+      text-transform:uppercase;
+      letter-spacing:0.13em;
+    }
+
+    .booking-list{
+      list-style:none;
+      margin-top:0.5rem;
+      padding-left:0;
+    }
+
+    .booking-list li{
+      margin-bottom:0.3rem;
+    }
+
+    /* GALERÍA */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:0.75rem;
+    }
+
+    @media (max-width:900px){
+      .gallery-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:640px){
+      .gallery-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    .gallery-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#111;
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.4s ease, opacity 0.4s ease;
+      aspect-ratio:1/1;
+      opacity:0.9;
+    }
+
+    .gallery-item::after{
+      content:"Ver en Instagram";
+      position:absolute;
+      inset:auto 0.4rem 0.4rem 0.4rem;
+      font-size:0.7rem;
+      color:#f5f5f5;
+      padding:0.3rem 0.55rem;
+      border-radius:999px;
+      background:rgba(0,0,0,0.65);
+      opacity:0;
+      transform:translateY(6px);
+      transition:all 0.25s ease;
+      text-align:center;
+    }
+
+    .gallery-item:hover img{
+      transform:scale(1.04);
+      opacity:1;
+    }
+
+    .gallery-item:hover::after{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .insta-link{
+      font-size:0.8rem;
+      color:var(--muted);
+    }
+
+    .insta-link a{
+      text-decoration:underline;
+    }
+
+    /* FOOTER */
+    footer{
+      border-top:1px solid var(--border);
+      padding:1.5rem 0 1rem;
+      color:var(--muted);
+      font-size:0.78rem;
+    }
+
+    .footer-top{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:0.75rem;
+    }
+
+    .footer-col{
+      max-width:260px;
+    }
+
+    .footer-col strong{
+      color:var(--text);
+      font-weight:500;
+    }
+
+    .footer-contact{
+      display:flex;
+      flex-direction:column;
+      gap:0.2rem;
+    }
+
+    .footer-bottom{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:0.5rem;
+    }
+
+    .footer-bottom a{
+      text-decoration:underline;
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:1.2rem;
+      transform:translateX(-50%) translateY(120%);
+      background:#111;
+      color:var(--text);
+      border-radius:999px;
+      border:1px solid var(--border);
+      padding:0.55rem 1rem;
+      font-size:0.8rem;
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      z-index:50;
+      opacity:0;
+      transition:all 0.25s ease;
+    }
+
+    .toast.show{
+      transform:translateX(-50%) translateY(0);
+      opacity:1;
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <nav>
-        <div class="logo">
-          <div class="logo-mark" aria-hidden="true"></div>
-          <div>
-            <strong>7cuts</strong><div class="muted" style="font-size:.8rem">Hair & Style Studio</div>
-          </div>
-        </div>
-        <div class="nav-links" aria-label="primary">
-          <a href="#services">Services</a>
-          <a href="#offers">Offers</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#booking" class="btn brand">Book now</a>
-        </div>
-      </nav>
-    </div>
-  </header>
 
-  <!-- Hero -->
-  <section class="container hero" id="home">
+<header>
+  <nav class="nav">
+    <div class="logo">manuluxebrows</div>
+    <div class="nav-links">
+      <a href="#services">Servicios</a>
+      <a href="#booking">Reservas</a>
+      <a href="#gallery">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrapper">
+  <!-- HERO -->
+  <section class="hero" id="inicio">
     <div>
-      <div class="pill"><span class="tag">New</span> WhatsApp bookings now available</div>
-      <h1>Fresh cuts. Soft colors. <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">You.</span></h1>
-      <p>Welcome to <b>7cuts</b>, a modern hair studio where precision meets creativity. From clean fades to vibrant color — we craft looks that feel like you.</p>
-      <div style="display:flex;gap:.8rem;margin-top:1rem">
-        <a class="btn brand" href="#booking">Book an appointment</a>
-        <a class="btn ghost" href="https://wa.me/923486144475" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <div class="hero-badge">
+        <span>✨ Belleza, cosmética y cuidado personal</span>
       </div>
-      <div class="chips" style="margin-top:1rem">
-        <span class="tag" title="Quick">⏱️ 45–60 min</span>
-        <span class="tag" title="Unisex">🧑‍🦱 Unisex</span>
-        <span class="tag" title="Kids welcome">🧒 Kids</span>
-      </div>
-    </div>
-    <div class="card" style="overflow:hidden">
-      <img alt="Hair studio collage" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop"/>
-    </div>
-  </section>
+      <h1 class="hero-title">
+        Tu mirada, tu poder. <span class="hero-highlight">Cejas y pestañas de lujo en Burgos.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Especialista en <strong>Cejas laminado y Micropigmentación</strong> y
+        <strong>Pestañas lifting y extensiones</strong>. Resultados naturales, elegantes y personalizados para ti.
+      </p>
 
-  <!-- KPIs / Highlights -->
-  <section class="container section" aria-label="highlights">
-    <div class="kpis">
-      <div class="kpi"><b>4.9★</b><div class="muted">Customer rating</div></div>
-      <div class="kpi"><b>10+</b><div class="muted">Years experience</div></div>
-      <div class="kpi"><b>7</b><div class="muted">Signature cuts</div></div>
-      <div class="kpi"><b>24/7</b><div class="muted">Online booking</div></div>
-    </div>
-  </section>
+      <div class="hero-cta">
+        <button class="btn" id="btnGoBooking">
+          Reservar por WhatsApp
+        </button>
+        <a class="btn btn-outline" href="https://www.instagram.com/manuluxebrows" target="_blank" rel="noreferrer">
+          Ver Instagram @manuluxebrows
+        </a>
+      </div>
 
-  <!-- Services & Prices -->
-  <section class="container section" id="services">
-    <h2>Services & Prices</h2>
-    <div class="grid grid-3">
-      <div class="card">
-        <div class="price-row"><span><b>Classic Cut</b> <span class="muted">(wash + style)</span></span><b>$18</b></div>
-        <div class="price-row"><span><b>Skin Fade</b> <span class="muted">(detail finish)</span></span><b>$22</b></div>
-        <div class="price-row"><span><b>Kids Cut</b> <span class="muted">(under 12)</span></span><b>$12</b></div>
-        <div class="price-row"><span><b>Beard Trim</b> <span class="muted">(line-up)</span></span><b>$8</b></div>
-      </div>
-      <div class="card">
-        <div class="price-row"><span><b>Wash & Blow-Dry</b></span><b>$15</b></div>
-        <div class="price-row"><span><b>Root Color</b> <span class="muted">(ammonia-free)</span></span><b>$28</b></div>
-        <div class="price-row"><span><b>Full Color</b> <span class="muted">(shoulder length)</span></span><b>$40</b></div>
-        <div class="price-row"><span><b>Highlights / Balayage</b></span><b>$55</b></div>
-      </div>
-      <div class="card">
-        <div class="price-row"><span><b>Keratin Smooth</b></span><b>$60</b></div>
-        <div class="price-row"><span><b>Hair Spa</b> <span class="muted">(mask + massage)</span></span><b>$20</b></div>
-        <div class="price-row"><span><b>Updo / Styling</b></span><b>$25</b></div>
-        <div class="price-row"><span><b>Bridal Trial</b></span><b>$35</b></div>
+      <div class="hero-meta">
+        <span>📍 Burgos, España</span>
+        <span>📲 WhatsApp: +34 624 94 72 49</span>
+        <span>🖤 Estudio privado · Solo con cita</span>
       </div>
     </div>
-    <p class="note" style="margin-top:.8rem">Prices are indicative; final costs depend on hair length, volume & desired results. Ask us for a quick quote on WhatsApp.</p>
-  </section>
 
-  <!-- Offers -->
-  <section class="container section" id="offers">
-    <h2>Seasonal Offers</h2>
-    <div class="grid grid-3">
-      <div class="offer">
-        <div class="tag">Save 20%</div>
-        <h3>Color + Cut Combo</h3>
-        <p class="muted">Any full color service with a Classic Cut. Weekdays 11–4.</p>
-        <div><b>Now $46</b> <span class="slash">/</span> <span class="muted">$58</span></div>
-      </div>
-      <div class="offer">
-        <div class="tag">Student Deal</div>
-        <h3>Skin Fade + Beard</h3>
-        <p class="muted">Bring your ID. Clean lines, clean price.</p>
-        <div><b>$26</b> <span class="slash">/</span> <span class="muted">$30</span></div>
-      </div>
-      <div class="offer">
-        <div class="tag">New Client</div>
-        <h3>First Visit -10%</h3>
-        <p class="muted">Welcome to 7cuts! Apply at checkout for any service.</p>
-        <div><b>Auto-discount</b></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery -->
-  <section class="container section" id="gallery">
-    <h2>Gallery</h2>
-    <div class="gallery">
-      <img alt="Studio" src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Color" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Fade" src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Bridal" src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Blow dry" src="https://images.unsplash.com/photo-1515901381114-45a46b63616b?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Tools" src="https://images.unsplash.com/photo-1522336572468-97b06e8ef143?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Style" src="https://images.unsplash.com/photo-1593702288056-7927eeac06db?q=80&w=800&auto=format&fit=crop"/>
-      <img alt="Team" src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=800&auto=format&fit=crop"/>
-    </div>
-  </section>
-
-  <!-- Booking -->
-  <section class="container section" id="booking">
-    <h2>Book an Appointment</h2>
-    <div class="grid grid-2">
-      <form class="card" id="bookingForm" style="padding:1.2rem">
-        <div class="row">
-          <div>
-            <label for="name">Your name</label>
-            <input id="name" name="name" placeholder="Alex" required />
-          </div>
-          <div>
-            <label for="phone">Your phone (optional)</label>
-            <input id="phone" name="phone" placeholder="03xx-xxxxxxx" />
-          </div>
+    <div class="hero-photo">
+      <div class="hero-photo-inner">
+        <!-- Aquí puedes poner una foto tuya en vertical 4:5 -->
+        <!-- <img src="tu-foto.jpg" alt="Manuela - Manuluxebrows"> -->
+        <div class="hero-photo-placeholder">
+          Añade aquí tu foto principal (4:5)
         </div>
-        <div class="row">
-          <div>
-            <label for="date">Date</label>
-            <input id="date" name="date" type="date" required />
-          </div>
-          <div>
-            <label for="time">Time</label>
-            <input id="time" name="time" type="time" required />
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="services">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Servicios</h2>
+        <p class="section-caption">Cejas y pestañas diseñadas para resaltar tu belleza natural.</p>
+      </div>
+      <div class="section-caption">
+        Pregunta por packs y promociones especiales vía WhatsApp.
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-tag">Cejas</div>
+        <h3 class="service-name">Laminado de Cejas</h3>
+        <p class="service-desc">
+          Efecto peinado y definido durante semanas. Ideal para cejas rebeldes o con poca forma.
+        </p>
+        <p class="service-time">⏱ Duración aprox.: 60 min</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-tag">Cejas</div>
+        <h3 class="service-name">Micropigmentación de Cejas</h3>
+        <p class="service-desc">
+          Diseño a medida, simetría y tono adaptado a tu rostro y estilo. Resultado elegante y natural.
+        </p>
+        <p class="service-time">⏱ Sesión inicial + retoque</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-tag">Pestañas</div>
+        <h3 class="service-name">Lifting de Pestañas</h3>
+        <p class="service-desc">
+          Curvatura perfecta, mirada despierta sin necesidad de máscara. Incluye tinte si lo deseas.
+        </p>
+        <p class="service-time">⏱ Duración aprox.: 60 min</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-tag">Pestañas</div>
+        <h3 class="service-name">Extensiones de Pestañas</h3>
+        <p class="service-desc">
+          Desde efecto natural hasta más marcado. Colocación pelo a pelo con máximo cuidado.
+        </p>
+        <p class="service-time">⏱ Duración aprox.: 90–120 min</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- RESERVAS -->
+  <section id="booking">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Reservas por WhatsApp</h2>
+        <p class="section-caption">
+          Gestiona tu cita en segundos: nueva reserva, modificación o cancelación.
+        </p>
+      </div>
+    </div>
+
+    <div class="booking">
+      <div class="booking-card">
+        <div class="booking-field">
+          <label class="booking-label" for="nombre">Tu nombre *</label>
+          <input id="nombre" class="booking-input" type="text" placeholder="Ej. Laura García" required />
         </div>
-        <div class="row">
-          <div>
-            <label for="service">Service</label>
-            <select id="service" name="service" required>
-              <option value="Classic Cut">Classic Cut</option>
-              <option value="Skin Fade">Skin Fade</option>
-              <option value="Kids Cut">Kids Cut</option>
-              <option value="Beard Trim">Beard Trim</option>
-              <option value="Wash & Blow-Dry">Wash & Blow-Dry</option>
-              <option value="Root Color">Root Color</option>
-              <option value="Full Color">Full Color</option>
-              <option value="Highlights / Balayage">Highlights / Balayage</option>
-              <option value="Keratin Smooth">Keratin Smooth</option>
-              <option value="Hair Spa">Hair Spa</option>
-              <option value="Updo / Styling">Updo / Styling</option>
-              <option value="Bridal Trial">Bridal Trial</option>
+
+        <div class="booking-row">
+          <div class="booking-field" style="flex:1">
+            <label class="booking-label" for="tipo">¿Qué quieres hacer? *</label>
+            <select id="tipo" class="booking-select">
+              <option value="nueva cita">Reservar nueva cita</option>
+              <option value="modificar mi cita">Modificar cita existente</option>
+              <option value="cancelar mi cita">Cancelar mi cita</option>
             </select>
           </div>
-          <div>
-            <label for="notes">Notes</label>
-            <input id="notes" name="notes" placeholder="Any preferences or references?" />
+
+          <div class="booking-field" style="flex:1">
+            <label class="booking-label" for="servicio">Servicio</label>
+            <select id="servicio" class="booking-select">
+              <option value="">Selecciona un servicio</option>
+              <option value="Laminado de cejas">Laminado de cejas</option>
+              <option value="Micropigmentación de cejas">Micropigmentación de cejas</option>
+              <option value="Lifting de pestañas">Lifting de pestañas</option>
+              <option value="Extensiones de pestañas">Extensiones de pestañas</option>
+              <option value="Consulta / Asesoría">Consulta / Asesoría</option>
+            </select>
           </div>
         </div>
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem">
-          <button class="btn brand" type="submit">Send via WhatsApp</button>
-          <button class="btn" type="button" id="calendarBtn">Add to Calendar (.ics)</button>
+
+        <div class="booking-row">
+          <div class="booking-field" style="flex:1">
+            <label class="booking-label" for="fecha">Fecha deseada</label>
+            <input id="fecha" class="booking-input" type="date" />
+          </div>
+          <div class="booking-field" style="flex:1">
+            <label class="booking-label" for="hora">Horario aproximado</label>
+            <input id="hora" class="booking-input" type="time" />
+          </div>
         </div>
-        <p class="note" style="margin-top:.8rem">On submit, WhatsApp opens with your details pre-filled and sent to <b>7cuts</b>.</p>
-      </form>
-      <div class="card" style="padding:1.2rem">
-        <h3 style="margin-top:0">Find us</h3>
-        <p class="muted">We’re in your city — exact address coming soon. Message us on WhatsApp for directions and parking tips.</p>
-        <div class="chips" style="margin:.8rem 0 1.2rem">
-          <span class="tag">Walk-ins welcome</span>
-          <span class="tag">Cash & cards</span>
-          <span class="tag">Free Wi‑Fi</span>
+
+        <div class="booking-field">
+          <label class="booking-label" for="mensaje">Mensaje adicional</label>
+          <textarea id="mensaje" class="booking-textarea" placeholder="Cuéntame un poco qué buscas, si has tenido algún tratamiento previo, etc."></textarea>
         </div>
-        <div class="card" style="overflow:hidden;border-radius:12px">
-          <img alt="Salon ambience" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop"/>
-        </div>
-        <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
-          <a class="btn brand" href="https://wa.me/923486144475" target="_blank" rel="noopener">WhatsApp: +92 348 6144475</a>
-          <a class="btn" href="mailto:hello@7cuts.studio">Email us</a>
-        </div>
+
+        <button class="btn" id="btnSend">
+          Enviar solicitud por WhatsApp
+        </button>
+
+        <p class="booking-note">
+          Al pulsar el botón se abrirá WhatsApp con el mensaje listo para enviar al número
+          <strong>+34 624 94 72 49</strong>.  
+          Para modificaciones y cancelaciones, por favor indícanos tu nombre y la fecha de la cita reservada.
+        </p>
       </div>
+
+      <aside class="booking-side">
+        <div>
+          <div class="booking-pill">Política de citas</div>
+          <ul class="booking-list">
+            <li>• Las reservas se confirman siempre por mensaje de vuelta.</li>
+            <li>• Puedes modificar o cancelar tu cita con antelación razonable.</li>
+            <li>• Llegar maquillada/o puede alargar el tiempo del servicio.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="booking-pill">Consejos antes de tu cita</div>
+          <ul class="booking-list">
+            <li>• Ven con la zona limpia y sin maquillaje.</li>
+            <li>• Si dudas entre varios servicios, elige “Consulta / Asesoría”.</li>
+            <li>• Trae fotos de inspiración si tienes un estilo en mente.</li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <!-- Roadmap / Future Upgrades -->
-  <section class="container section" id="upgrades">
-    <h2>Upgrades Coming Soon</h2>
-    <div class="grid grid-3">
-      <div class="card" style="padding:1rem">
-        <h3 style="margin:.2rem 0">Online Payments</h3>
-        <p class="muted">Deposit to secure your slot. Stripe & JazzCash support planned.</p>
+  <!-- GALERÍA INSTAGRAM -->
+  <section id="gallery">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Galería</h2>
+        <p class="section-caption">
+          Antes y después reales de nuestras clientas.  
+          Inspirado en el feed de Instagram <strong>@manuluxebrows</strong>.
+        </p>
       </div>
-      <div class="card" style="padding:1rem">
-        <h3 style="margin:.2rem 0">Staff Selector</h3>
-        <p class="muted">Pick your stylist and view real-time availability.</p>
-      </div>
-      <div class="card" style="padding:1rem">
-        <h3 style="margin:.2rem 0">Automated Reminders</h3>
-        <p class="muted">WhatsApp + Email reminders 24h before your visit.</p>
+      <div class="insta-link">
+        Ver todo en Instagram:
+        <a href="https://www.instagram.com/manuluxebrows" target="_blank" rel="noreferrer">@manuluxebrows</a>
       </div>
     </div>
+
+    <!--
+      IMPORTANTE:
+      Sustituye "foto1.jpg", "foto2.jpg", etc. por tus fotos reales
+      (pueden ser las mismas que subes a Instagram).
+    -->
+    <div class="gallery-grid">
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto1.jpg" alt="Micropigmentación de cejas - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto2.jpg" alt="Laminado de cejas - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto3.jpg" alt="Pestañas lifting - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto4.jpg" alt="Extensiones de pestañas - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto5.jpg" alt="Antes y después cejas - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto6.jpg" alt="Detalle cejas - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto7.jpg" alt="Piel y mirada - manuluxebrows">
+      </a>
+      <a href="https://www.instagram.com/manuluxebrows" target="_blank" class="gallery-item">
+        <img src="foto8.jpg" alt="Trabajo en cabina - manuluxebrows">
+      </a>
+    </div>
+
+    <p class="insta-link" style="margin-top:0.75rem;">
+      Si quieres que la galería se actualice automáticamente con tu Instagram,
+      puedes más adelante integrar un widget de terceros o el embed oficial de tus posts.
+    </p>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-      <div>© <span id="year"></span> 7cuts. All rights reserved.</div>
-      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-        <a href="#services">Services</a><span class="slash">/</span>
-        <a href="#offers">Offers</a><span class="slash">/</span>
-        <a href="#booking">Book</a>
+  <!-- CONTACTO / FOOTER -->
+  <section id="contacto">
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <strong>manuluxebrows</strong><br>
+          Brow & Lash Studio · Burgos
+        </div>
+        <div class="footer-col footer-contact">
+          <strong>Contacto</strong>
+          <span>WhatsApp: <a href="https://wa.me/34624947249" target="_blank">+34 624 94 72 49</a></span>
+          <span>Instagram: <a href="https://www.instagram.com/manuluxebrows" target="_blank">@manuluxebrows</a></span>
+          <span>Ubicación: Burgos (estudio privado, dirección bajo reserva)</span>
+        </div>
       </div>
-    </div>
-  </footer>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> manuluxebrows. Todos los derechos reservados.</span>
+        <span>Diseño minimal · Blanco & negro.</span>
+      </div>
+    </footer>
+  </section>
+</main>
 
-  <script>
-    // ===== Helper: format date/time to readable text
-    function formatDate(d){
-      try{const dt=new Date(d);return dt.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});}catch(e){return d}
+<!-- Toast -->
+<div class="toast" id="toast">
+  ✅ Abriendo WhatsApp para enviar tu solicitud...
+</div>
+
+<script>
+  // Año automático en el footer
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Botón "Reservar" del hero -> bajar a la sección de reservas
+  document.getElementById("btnGoBooking")?.addEventListener("click", () => {
+    document.getElementById("booking")?.scrollIntoView({behavior:"smooth"});
+  });
+
+  // Mostrar pequeño aviso (toast)
+  function showToast(){
+    const toast = document.getElementById("toast");
+    if(!toast) return;
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"), 2600);
+  }
+
+  // Construir mensaje y abrir WhatsApp
+  document.getElementById("btnSend")?.addEventListener("click", () => {
+    const nombre   = document.getElementById("nombre").value.trim();
+    const tipo     = document.getElementById("tipo").value;
+    const servicio = document.getElementById("servicio").value;
+    const fecha    = document.getElementById("fecha").value;
+    const hora     = document.getElementById("hora").value;
+    const mensaje  = document.getElementById("mensaje").value.trim();
+
+    if(!nombre){
+      alert("Por favor, indica tu nombre 🙂");
+      return;
     }
-    function pad(n){return (n+"").padStart(2,'0')}
 
-    // ===== WhatsApp booking
-    const PHONE_WHATSAPP = '923486144475'; // 0092.. -> 92 for wa.me
-    const form = document.getElementById('bookingForm');
-    form.addEventListener('submit', e=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const service = document.getElementById('service').value;
-      const notes = document.getElementById('notes').value.trim();
-      if(!name||!date||!time||!service){
-        alert('Please fill name, date, time and service.');
-        return;
-      }
-      const pretty = `${formatDate(date)} at ${time}`;
-      const msg = `Hi 7cuts!%0A%0AI'd like to book an appointment.%0A%0A`+
-                  `Name: ${encodeURIComponent(name)}%0A`+
-                  (phone?`Phone: ${encodeURIComponent(phone)}%0A`:``)+
-                  `Service: ${encodeURIComponent(service)}%0A`+
-                  `Date & Time: ${encodeURIComponent(pretty)}%0A`+
-                  (notes?`Notes: ${encodeURIComponent(notes)}%0A`:``)+
-                  `%0ASent from 7cuts website.`;
-      const url = `https://wa.me/${PHONE_WHATSAPP}?text=${msg}`;
-      window.open(url,'_blank','noopener');
-    });
+    let texto = `Hola Manuela, soy ${nombre}. Quiero ${tipo}`;
 
-    // ===== ICS (Add to Calendar) generator
-    document.getElementById('calendarBtn').addEventListener('click',()=>{
-      const name = document.getElementById('name').value.trim()||'7cuts Appointment';
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const service = document.getElementById('service').value;
-      if(!date||!time){
-        alert('Select date and time first.');
-        return;
-      }
-      // build ISO date in local timezone → convert to UTC basic format (YYYYMMDDTHHMMSSZ)
-      const [hh,mm] = time.split(':').map(Number);
-      const dtLocal = new Date(date + 'T' + pad(hh) + ':' + pad(mm) + ':00');
-      const dtEnd = new Date(dtLocal.getTime() + 60*60*1000); // default 1h
-      function toICS(d){
-        const yyyy=d.getUTCFullYear();
-        const m=pad(d.getUTCMonth()+1);
-        const dd=pad(d.getUTCDate());
-        const h=pad(d.getUTCHours());
-        const mi=pad(d.getUTCMinutes());
-        const s=pad(d.getUTCSeconds());
-        return `${yyyy}${m}${dd}T${h}${mi}${s}Z`;
-      }
-      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//7cuts//Booking//EN\nBEGIN:VEVENT\nUID:${Date.now()}@7cuts\nDTSTAMP:${toICS(new Date())}\nDTSTART:${toICS(dtLocal)}\nDTEND:${toICS(dtEnd)}\nSUMMARY:${name} — ${service}\nDESCRIPTION:7cuts hair appointment. WhatsApp: +92 348 6144475\nEND:VEVENT\nEND:VCALENDAR`;
-      const blob = new Blob([ics], {type:'text/calendar'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = '7cuts-appointment.ics';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
+    if(servicio){
+      texto += ` para ${servicio}`;
+    }
 
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    if(fecha){
+      const fechaObj = new Date(fecha);
+      const opciones = { day:"2-digit", month:"2-digit", year:"numeric" };
+      const fechaBonita = fechaObj.toLocaleDateString("es-ES", opciones);
+      texto += ` el ${fechaBonita}`;
+    }
+
+    if(hora){
+      texto += ` sobre las ${hora}`;
+    }
+
+    texto += ".";
+
+    if(mensaje){
+      texto += `%0A%0ADetalles: ${mensaje}`;
+    }
+
+    texto += "%0A%0AEnviado desde la web de manuluxebrows.";
+
+    const phone = "34624947249"; // sin "+"
+    const url = `https://wa.me/${phone}?text=${texto}`;
+
+    showToast();
+    window.open(url, "_blank");
+  });
+</script>
+
 </body>
 </html>
